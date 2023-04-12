@@ -13,6 +13,7 @@ creates the flask application named app
 """
 app.register_blueprint(app_views)
 
+
 @app.teardown_appcontext
 def teardown_db(exception):
     """closes the storage on teardown"""
