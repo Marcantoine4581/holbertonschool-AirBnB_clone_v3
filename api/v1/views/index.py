@@ -20,12 +20,12 @@ def status():
 
 @app_views.route('/stats')
 def stats():
-    newDict = {
-  "amenities": models.storage.count(Amenity), 
-  "cities": models.storage.count(City), 
-  "places": models.storage.count(Place), 
-  "reviews": models.storage.count(Review), 
-  "states": models.storage.count(State), 
-  "users": models.storage.count(User)
-}
+    newDict = {"amenities": models.storage.count(Amenity),
+               "cities": models.storage.count(City),
+               "places": models.storage.count(Place),
+               "reviews": models.storage.count(Review),
+               "states": models.storage.count(State),
+               "users": models.storage.count(User)
+               }
+
     return jsonify(newDict)
