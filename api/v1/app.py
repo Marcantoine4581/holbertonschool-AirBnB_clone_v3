@@ -3,7 +3,7 @@
 starts a Flask web application
 """
 from api.v1.views import app_views
-from flask import Flask, make_response
+from flask import Flask, make_response, jsonify
 from models import storage
 from os import getenv
 
