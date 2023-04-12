@@ -2,7 +2,7 @@
 """
 starts a Flask web application
 """
-from api.v1.views import app_views #ajouter un point avant api?
+from api.v1.views import app_views
 from flask import Flask
 from models import storage
 from os import getenv
