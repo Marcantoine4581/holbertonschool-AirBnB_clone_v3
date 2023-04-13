@@ -37,7 +37,7 @@ def delete_amenity_id(amenity_id):
     if not amenity:
         abort(404)
     else:
-        models.storage.delete(state)
+        models.storage.delete(amenity)
         models.storage.save()
     return make_response(jsonify({}), 200)
 
@@ -59,7 +59,7 @@ def post_amenities():
 
 @app_views.route('/amenities/<amenity_id>', methods=['PUT'],
                  strict_slashes=False)
-def put_states(amenity_id):
+def put_amenities(amenity_id):
     """Updates an amenity given its id"""
     """We search in the db for the given amenity"""
     amenity = models.storage.get(Amenity, amenity_id)
