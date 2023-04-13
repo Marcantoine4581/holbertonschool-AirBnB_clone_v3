@@ -29,7 +29,7 @@ def get_reviews(place_id):
 def get_review_id(review_id):
     '''retrieves a review given its id'''
     review = models.storage.get(Review, review_id)
-    if not place:
+    if not review:
         abort(404)
     else:
         return jsonify(review.to_dict())
