@@ -53,7 +53,6 @@ def post_state():
         abort(400, {'error': 'Missing name'})
 
     data = request.get_json()
-    # ** permet de faire passer args
     instance = State(**data)
     instance.save()
     return make_response(jsonify(instance.to_dict()), 201)
@@ -75,7 +74,6 @@ def put_state(state_id):
 
     non = ['id', 'created_at', 'updated_at']
 
-    # données requête récupérées
     data = request.get_json()
 
     for key, value in data.items():
