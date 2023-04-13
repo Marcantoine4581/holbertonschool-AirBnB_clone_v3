@@ -14,7 +14,7 @@ def get_users():
     allUsers = models.storage.all(User).values()
     usersList = []
     for user in allUsers:
-        usersList.append(state.to_dict())
+        usersList.append(user.to_dict())
     return jsonify(usersList)
 
 
@@ -54,7 +54,7 @@ def post_users():
         return jsonify({'error': 'Missing password'}), 400
     else:
         newUser = User(**dictionary)
-        models.storage.save()
+        models.storage.save() #newUser.save() ?
         return jsonify(newUser.to_dict()), 201
 
 
