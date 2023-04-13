@@ -16,7 +16,7 @@ def get_places(city_id):
     '''Retrieves all places objects of a city'''
     city = models.storage.get(City, city_id)
     placesList = []
-    if not state:
+    if not city:
         abort(404)
     for place in city.places:
         placesList.append(place.to_dict())
