@@ -47,7 +47,7 @@ def delete_city_id(city_id):
 
 @app_views.route('/states/<state_id>/cities', methods=['POST'],
                  strict_slashes=False)
-def post_cities():
+def post_cities(state_id):
     '''Returns the new city with the status code 201'''
     state = models.storage.get(State, state_id)
     if not state:
@@ -60,7 +60,7 @@ def post_cities():
         return jsonify({'error': 'Missing name'}), 400
     else:
         newCity = City(**dictionary)
-        newCity.storage.save()
+        models.storage.save()
         return jsonify(newCity.to_dict()), 201
 
 
