@@ -61,9 +61,9 @@ def post_places(city_id):
     elif 'name' not in dictionary:
         return jsonify({'error': 'Missing name'}), 400
 
-    user = models.storage.get(User, dictionary['user_id'])
     if 'user_id' not in dictionary:
         return jsonify({'error': 'Missing user_id'}), 400
+    user = models.storage.get(User, dictionary['user_id'])
     if not user:
         abort(404)
 
