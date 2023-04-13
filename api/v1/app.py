@@ -6,8 +6,10 @@ from api.v1.views import app_views
 from flask import Flask, make_response, jsonify
 from models import storage
 from os import getenv
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 """
 creates the flask application named app
 """
