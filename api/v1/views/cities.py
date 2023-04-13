@@ -59,7 +59,7 @@ def post_cities():
     else:
         newCity = City(**dictionary)
         models.storage.save()
-        return jsonify(newState.to_dict()), 201
+        return jsonify(newCity.to_dict()), 201
 
 
 @app_views.route('/cities/<city_id>', methods=['PUT'], strict_slashes=False)
