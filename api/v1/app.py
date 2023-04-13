@@ -10,7 +10,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 api_v1_cors_config = {
-    "origins": ["*"]
+    "origins": ["http://localhost:5000"]
     }
 CORS(app, resources={
     r"/api/v1/*": api_v1_cors_config
