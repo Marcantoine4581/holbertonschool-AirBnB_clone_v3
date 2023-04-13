@@ -9,7 +9,8 @@ from models.city import City
 from models.state import State
 
 
-@app_views.route('/states/<state_id>/cities', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities', methods=['GET'],
+                 strict_slashes=False)
 def get_cities(state_id):
     '''Retrieves all city objects of a state'''
     state = models.storage.get(State, state_id)
@@ -44,7 +45,8 @@ def delete_city_id(city_id):
     return make_response(jsonify({}), 200)
 
 
-@app_views.route('/states/<state_id>/cities', methods=['POST'], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities', methods=['POST'],
+                 strict_slashes=False)
 def post_cities():
     '''Returns the new city with the status code 201'''
     state = models.storage.get(State, state_id)
@@ -58,7 +60,7 @@ def post_cities():
         return jsonify({'error': 'Missing name'}), 400
     else:
         newCity = City(**dictionary)
-        models.storage.save()
+        newCity.storage.save()
         return jsonify(newCity.to_dict()), 201
 
 
