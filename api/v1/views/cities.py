@@ -5,8 +5,8 @@ City file
 from api.v1.views import app_views
 from flask import abort, jsonify, request, make_response
 import models
-from models.state import State
 from models.city import City
+from models.state import State
 
 
 @app_views.route('/states/<state_id>/cities', methods=['GET'], strict_slashes=False)
@@ -58,6 +58,7 @@ def post_cities():
         return jsonify({'error': 'Missing name'}), 400
     else:
         newCity = City(**dictionary)
+        newCity.state_id = state_id
         models.storage.save()
         return jsonify(newCity.to_dict()), 201
 
