@@ -54,7 +54,7 @@ def post_users():
         return jsonify({'error': 'Missing password'}), 400
     else:
         newUser = User(**dictionary)
-        models.storage.save() #newUser.save() ?
+        models.storage.save()
         return jsonify(newUser.to_dict()), 201
 
 
