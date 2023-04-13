@@ -3,7 +3,7 @@
 State file
 """
 from api.v1.views import app_views
-from flask import abort, jsonify, request
+from flask import abort, jsonify, request, make_response
 import models
 from models.state import State
 
@@ -47,8 +47,29 @@ def post_states():
     '''Returns the new State with the status code 201'''
     dictionary = request.get_json()
     if not dictionary:
-        return jsonify({'error': 'Not a JSON'}), 400
+        return make_response(jsonify({'error': 'Not a JSON'}), 400)
 
     elif 'name' not in dictionary:
-        return jsonify({'error': 'Missing name'}), 400
-    #fonction à terminer
+        return make_response(jsonify({'error': 'Missing name'}), 400)
+    else:
+        newState = State(**dictionary)
+        models.storage.save()
+        return make_response(jsonify(newState.to_dict()), 201)
+
+@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
+def put_states():
+    """Updates a State given its id"""
+    """We search in the db for the given state"""
+    state = models.storage.get(State, state_id)
+    if not state:
+        abort(404)
+    dictionary = request.get_json()
+    if not dictionary:
+        return make_response(jsonify({'error': 'Not a JSON'}), 400)
+
+    """We update the instance ignoring its id, createdat and updatedat"""
+    for key, value in dictionary.items():
+        if key != 'id' && key != 'created_at' && key != 'updated_at':
+            setattr(state, key, value)
+    models.storage.save()
+    return make_response(jsonify(state.to_dict()), 200)
