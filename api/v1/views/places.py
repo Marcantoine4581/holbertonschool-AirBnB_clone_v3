@@ -53,19 +53,19 @@ def post_places(city_id):
     city = models.storage.get(City, city_id)
     if not city:
         abort(404)
+
     dictionary = request.get_json()
     if not dictionary:
         return jsonify({'error': 'Not a JSON'}), 400
+    elif 'name' not in dictionary:
+        return jsonify({'error': 'Missing name'}), 400
 
     user = models.storage.get(User, dictionary['user_id'])
     if 'user_id' not in dictionary:
         return jsonify({'error': 'Missing user_id'}), 400
-
-    elif not user:
+    if not user:
         abort(404)
 
-    elif 'name' not in dictionary:
-        return jsonify({'error': 'Missing name'}), 400
     else:
         newPlace = Place(**dictionary)
         models.storage.save()
