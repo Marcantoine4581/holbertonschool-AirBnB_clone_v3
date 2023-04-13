@@ -42,7 +42,7 @@ def delete_amenity_id(amenity_id):
     return make_response(jsonify({}), 200)
 
 
-@app_views.route('/amenites', methods=['POST'], strict_slashes=False)
+@app_views.route('/amenities', methods=['POST'], strict_slashes=False)
 def post_amenities():
     '''Returns the new Amenity with the status code 201'''
     dictionary = request.get_json()
