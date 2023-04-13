@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-State file
+City file
 """
 from api.v1.views import app_views
 from flask import abort, jsonify, request, make_response
@@ -17,7 +17,7 @@ def get_cities(state_id):
     if not state:
         abort(404)
     for city in state.cities:
-        list_cities.append(city.to_dict())
+        cityList.append(city.to_dict())
     return jsonify(cityList)
 
 
