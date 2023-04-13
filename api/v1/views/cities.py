@@ -58,7 +58,6 @@ def post_cities():
         return jsonify({'error': 'Missing name'}), 400
     else:
         newCity = City(**dictionary)
-        newCity.state_id = state_id
         models.storage.save()
         return jsonify(newCity.to_dict()), 201
 
