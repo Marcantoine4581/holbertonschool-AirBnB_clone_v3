@@ -4,7 +4,7 @@ State file
 """
 from api.v1.views import app_views
 from flask import abort, jsonify, request, make_response
-from models
+import models
 from models.state import State
 
 
