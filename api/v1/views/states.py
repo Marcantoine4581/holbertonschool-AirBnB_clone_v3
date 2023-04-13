@@ -4,7 +4,7 @@ State file
 """
 from api.v1.views import app_views
 from flask import abort, jsonify, request, make_response
-from models import 
+from models import storage
 from models.state import State
 
 
@@ -20,8 +20,7 @@ def get_states():
 
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_state(state_id):
-    """cette fonction permet de récupérer une instance
-    spécifique avec un id pour la retrouver."""
+    '''retrieves a state given its id'''
     state = storage.get(State, state_id)
     if not state:
         abort(404)
@@ -32,7 +31,7 @@ def get_state(state_id):
 @app_views.route('/states/<state_id>', methods=['DELETE'],
                  strict_slashes=False)
 def delete_state(state_id):
-    """Deletes a State object"""
+    '''deletes a state given its id'''
     states = storage.all("State").values()
     for state in states:
         if state.id == state_id:
@@ -44,9 +43,7 @@ def delete_state(state_id):
 
 @app_views.route('/states/', methods=['POST'], strict_slashes=False)
 def post_state():
-    """
-    Creates a State
-    """
+    '''Returns the new State with the status code 201'''
     if not request.get_json():
         abort(400, {'error': 'Not a JSON'})
     if 'name' not in request.get_json():
@@ -60,10 +57,7 @@ def post_state():
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def put_state(state_id):
-    """
-    récupérer un objet d'état spécifique
-    à partir de son ID et lui changer valeur
-    """
+    """Updates a State given its id"""
     state = storage.get(State, state_id)
 
     if not state:
