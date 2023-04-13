@@ -28,7 +28,8 @@ def get_state_id(state_id):
         return jsonify(state.to_dict())
 
 
-@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['DELETE'],
+                 strict_slashes=False)
 def delete_state_id(state_id):
     '''deletes a state given its id'''
     state = models.storage.get(State, state_id)
@@ -38,6 +39,7 @@ def delete_state_id(state_id):
         models.storage.delete(state)
         models.storage.save()
     return make_response(jsonify({}), 200)
+
 
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
 def post_states():
@@ -52,6 +54,7 @@ def post_states():
         newState = State(**dictionary)
         models.storage.save()
         return jsonify(newState.to_dict()), 201
+
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def put_states(state_id):
