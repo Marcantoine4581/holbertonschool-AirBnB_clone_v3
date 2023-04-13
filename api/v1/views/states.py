@@ -35,10 +35,9 @@ def delete_state_id(state_id):
     if state is None:
         abort(404)
     else:
-        obj = State + '.' + state_id
-        models.storage.delete(obj)
+        models.storage.delete(state)
         models.storage.save()
-    return state, 200
+    return make_response(jsonify({}), 200)
 
 
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
@@ -68,7 +67,7 @@ def put_states(state_id):
 
     """We update the instance ignoring its id, createdat and updatedat"""
     for key, value in dictionary.items():
-        if key != 'id' and key != 'created_at' and key != 'updated_at':
+        if key not in ['id', 'created_at', 'updated_at']:    
             setattr(state, key, value)
     models.storage.save()
     return jsonify(state.to_dict()), 200
