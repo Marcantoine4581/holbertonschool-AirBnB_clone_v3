@@ -22,7 +22,7 @@ def get_states():
 def get_state_id(state_id):
     '''retrieves a state given its id'''
     state = models.storage.get(State, state_id)
-    if state is None:
+    if not state:
         abort(404)
     else:
         return jsonify(state.to_dict())
@@ -32,7 +32,7 @@ def get_state_id(state_id):
 def delete_state_id(state_id):
     '''deletes a state given its id'''
     state = models.storage.get(State, state_id)
-    if state is None:
+    if not state:
         abort(404)
     else:
         models.storage.delete(state)
