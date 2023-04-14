@@ -119,7 +119,7 @@ class TestFileStorage(unittest.TestCase):
         """test of the count method with file storage"""
         storage = FileStorage()
         stateDict = {'name': 'California'}
-        cityDict= {'name': 'Philadelphia'}
+        cityDict = {'name': 'Philadelphia'}
         cityDict2 = {'name': 'New York'}
         newState = State(**stateDict)
         newCity = City(**cityDict)
@@ -129,7 +129,7 @@ class TestFileStorage(unittest.TestCase):
         storage.new(newCity2)
         storage.save()
         count = storage.count()
-        self.assertEqual(len(sortage.all()), count)
+        self.assertEqual(len(storage.all()), count)
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_get(self):
