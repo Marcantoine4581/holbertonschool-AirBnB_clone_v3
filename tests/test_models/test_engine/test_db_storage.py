@@ -100,4 +100,5 @@ class TestFileStorage(unittest.TestCase):
         """test of the get method with db storage"""
         state = State(name="Washington")
         state.save()
-        self.assertIs(models.storage.get(State, state.id), state, "not the same object")
+        self.assertIs(models.storage.get(State, state.id), state,
+                      "not the same object")
